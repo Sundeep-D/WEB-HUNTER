@@ -59,6 +59,7 @@ def perform_full_scan(root, results_db, url):
 
         # check isScanningInProgress
         if isScanningInProgress:
+            update_progress(root, f"Crawling links in {json_obj['hostname']}", 0.8)
             extract_external_links(url, results_db)
 
         # check isScanningInProgress
@@ -76,6 +77,7 @@ def perform_full_scan(root, results_db, url):
 
         # check isScanningInProgress
         if isScanningInProgress:
+            update_progress(root, f"Rendering images..", 0.9)
             render_external_urls(root, results_db)
 
         # check isScanningInProgress

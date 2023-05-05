@@ -27,7 +27,7 @@ def initialize_ui():
     root.wm_state('zoomed')
     root.update()
     root.attributes('-fullscreen', False)
-    root.wm_iconbitmap('UI/images/logo.ico')
+    # root.wm_iconbitmap('UI/images/logo.ico')
 
     customtkinter.set_appearance_mode(
         "System"
@@ -146,7 +146,7 @@ def configure_home_frame():
 
     print(dir(root.home_frame))
     #     bg
-    root.home_frame.bg_image = customtkinter.CTkImage(Image.open("UI/images/bg.png"),
+    root.home_frame.bg_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "bg.png")),
                                                       size=(1200, 800))
     root.home_frame.bg_image_label = customtkinter.CTkLabel(root.home_frame, image=root.home_frame.bg_image, text='')
     root.home_frame.bg_image_label.grid(row=0, column=2, rowspan=6, columnspan=2, padx=(5, 5), pady=(10, 5),

@@ -1019,7 +1019,7 @@ async def insert(queue):
         await queue.put(port)
 
 
-async def consumer(queue, ip, result,self):
+async def consumer(queue, ip, result, self):
     global counter
     while True:
         port = await queue.get()
@@ -1027,14 +1027,14 @@ async def consumer(queue, ip, result,self):
         queue.task_done()
         counter += 1
         print(f"{Y}[!] {C}Scanning : {W}{counter}/{len(port_list)}", end="\r")
-        update_progress(self,  f"Scanning ports {counter}/{len(port_list)}", 0.6)
+        update_progress(self, f"Scanning ports {counter}/{len(port_list)}", 0.6)
 
 
 async def run(ip, result, threads, self):
     queue = asyncio.Queue(maxsize=threads)
 
     distrib = asyncio.create_task(insert(queue))
-    workers = [asyncio.create_task(consumer(queue, ip, result,self)) for _ in range(threads)]
+    workers = [asyncio.create_task(consumer(queue, ip, result, self)) for _ in range(threads)]
 
     await asyncio.gather(distrib)
     await queue.join()
@@ -1042,7 +1042,9 @@ async def run(ip, result, threads, self):
         worker.cancel()
 
 
-def port_scanner(ip, results_db,self):
+def port_scanner(ip, results_db, self):
+    global counter
+    counter = 0
     threads = 50
     global port_scan_results
     result = []
@@ -1062,7 +1064,7 @@ async def sock_conn(ip, port, result):
         connector = asyncio.open_connection(ip, port)
         await asyncio.wait_for(connector, 1)
         print(f"\x1b[K{G}[+] {C}{port}{W}")
-        print("str(port): ",str(port))
+        print("str(port): ", str(port))
         result.append(str(port))
         return True
     except TimeoutError:
@@ -1072,7 +1074,7 @@ async def sock_conn(ip, port, result):
 
 
 def ps_output(results_db, result):
-    print("PORT: ",result)
+    print("PORT: ", result)
     for i in range(len(result)):
         result[i] = f"Port {result[i]} is open"
     print(result)
