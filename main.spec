@@ -1,41 +1,16 @@
-# -*- mode: python -*-
-
-#block_cipher = None
-#from PyInstaller.utils.hooks import collect_data_files
+#File: main.spec
+#Author: Sundeep Dayalan
+#Website: www.sundeepdayalan.in
+#Github: https://github.com/Sundeep-D/WEB-HUNTER
+#Date: April 20, 2023
 #
-#a = Analysis(['web-hunter.py'],
-#             pathex=['C:\\Python36\\Scripts'],
-#             binaries=[],
-#             datas=[],
-#             hiddenimports=[],
-#             hookspath=[],
-#             runtime_hooks=[],
-#             excludes=[],
-#             win_no_prefer_redirects=False,
-#             win_private_assemblies=False,
-#             cipher=block_cipher)
-#
-##a.datas += collect_data_files('customtkinter')
-#a.datas += [('bg.png','UI/images/bg.png', "DATA")]
-#
-#pyz = PYZ(a.pure, a.zipped_data,
-#             cipher=block_cipher)
-#
-#exe = EXE(pyz,
-#          a.scripts,
-#          a.binaries,
-#          a.zipfiles,
-#          a.datas,
-#          name='WEB HUNTER',
-#          debug=False,
-#          strip=False,
-#          upx=True,
-#          console=False)
-#
-
-
-
-# -*- mode: python ; coding: utf-8 -*-
+#Description:
+#This code is used to create an executable file for a Python script using PyInstaller.
+#It imports collect_data_files from PyInstaller.utils.hooks to collect data files required for
+#the application. The Analysis object is initialized with the input script, binaries,
+#and data files, and the hiddenimports, excludes, and runtime_hooks options are set.
+#The pyz object is created with the PYZ method, and the exe object is created with the
+#EXE method, which generates the final executable file with the given name and options.
 
 block_cipher = None
 from PyInstaller.utils.hooks import collect_data_files

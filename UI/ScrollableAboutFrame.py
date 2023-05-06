@@ -1,10 +1,14 @@
-import io
+"""
+File: ScrollableAboutFrame.py
+Author: Sundeep Dayalan
+Website: www.sundeepdayalan.in
+Github: https://github.com/Sundeep-D/WEB-HUNTER
+Date: May 02, 2023
+
+Description: This code defines a class called ScrollableAboutFrame which is a custom tkinter frame with scrolling
+functionality. It contains a method called add_about_information which adds labels and frames to the frame widget
+based on input information."""
 import os
-import urllib
-import webbrowser
-
-from PIL import Image, ImageTk
-
 import customtkinter
 
 
@@ -21,16 +25,14 @@ class ScrollableAboutFrame(customtkinter.CTkScrollableFrame):
         self.label_list = []
         self.button_list = []
 
-
-    def add_about_information(self, item,renderframe):
+    def add_about_information(self, item, renderframe):
 
         renderframe.label_list = []
-        print("selfself:",renderframe)
         title = customtkinter.CTkLabel(renderframe, text="WEB HUNTER", compound="left", padx=5, anchor="w",
                                        font=customtkinter.CTkFont(size=35, weight="bold"), text_color="gray")
         title.grid(row=0, column=0, sticky="w")
         if not item:
-            label = customtkinter.CTkLabel(renderframe, text=' ', compound="left", padx=5,pady=20, anchor="w",
+            label = customtkinter.CTkLabel(renderframe, text=' ', compound="left", padx=5, pady=20, anchor="w",
                                            font=customtkinter.CTkFont(size=15))
             label.grid(row=len(renderframe.label_list), column=0, pady=(10, 10), sticky="w")
             renderframe.label_list.append(label)
@@ -42,7 +44,6 @@ class ScrollableAboutFrame(customtkinter.CTkScrollableFrame):
             frame.grid_rowconfigure(2, weight=1)
 
             info = item.split(':')
-            print("INFO:", info)
             # Create the label widget and add it to the Frame
             title = customtkinter.CTkLabel(frame, text=info[0], compound="left", padx=5, anchor="w",
                                            font=customtkinter.CTkFont(size=15, weight="bold"), text_color="gray")

@@ -1,15 +1,21 @@
+"""
+File: scanner.py
+Author: Sundeep Dayalan
+Website: www.sundeepdayalan.in
+Github: https://github.com/Sundeep-D/WEB-HUNTER
+Date: April 21, 2023
+
+Description: This code defines a function called "perform_full_scan" that performs a full security scan on a given
+website using various techniques such as whois lookup, SSL certificate gathering, port scanning, and link crawling,
+among others, and updates the results on the GUI."""
 import json
 import time
 
-from ENGINE.dns_scanner import dns_scan
-from ENGINE.export import export
-from ENGINE.headers_scanner import headers
-from ENGINE.port_scanner import port_scanner
+from ENGINE.engine import whois_lookup, headers, sll_certificate, dns_scan, port_scanner, extract_external_links, \
+    extract_internal_links, extract_image_urls
 from ENGINE.render_results import render_who_is_information, render_headers_information, render_ssl_information, \
     render_dns_information, render_portscan_results, render_image_urls, render_external_urls, render_internal_urls
-from ENGINE.ssl_scanner import sll_certificate
-from ENGINE.web_crawler import extract_external_links, extract_image_urls, extract_internal_links
-from ENGINE.whois_scanner import whois_lookup
+
 from UI.ProgressHandler import update_progress
 
 isScanningInProgress = True
@@ -17,70 +23,56 @@ isScanningInProgress = True
 
 def perform_full_scan(root, results_db, url):
     json_obj = json.loads(json.dumps(results_db))
-    print(results_db)
-
 
     if 'ip' in results_db:
-        print("IP received: ", results_db['ip'])
-        print("DATA1: ", results_db)
-        # check isScanningInProgress
+
         if isScanningInProgress:
             update_progress(root, f"looking who-is information for {results_db['ip']}", 0.1)
             whois_lookup(results_db['ip'], results_db)
             json_obj = json.loads(json.dumps(results_db))
             render_who_is_information(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             headers(url, results_db)
             json_obj = json.loads(json.dumps(results_db))
             render_headers_information(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             update_progress(root, f"Gathering SSL Certificate information for {json_obj['ip']}", 0.3)
             sll_certificate(results_db['hostname'], results_db)
             json_obj = json.loads(json.dumps(results_db))
             render_ssl_information(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             update_progress(root, f"Pulling the DNS records for {results_db['ip']}", 0.4)
             dns_scan(results_db['domain'], results_db)
             json_obj = json.loads(json.dumps(results_db))
             render_dns_information(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             update_progress(root, f"Scanning ports in {json_obj['whois']['result']['cidr']}", 0.5)
             port_scanner(results_db['ip'], results_db, root)
             json_obj = json.loads(json.dumps(results_db))
             render_portscan_results(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             update_progress(root, f"Crawling links in {json_obj['hostname']}", 0.8)
             extract_external_links(url, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             extract_internal_links(url, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             extract_image_urls(url, results_db)
             json_obj = json.loads(json.dumps(results_db))
 
-        # check isScanningInProgress
         if isScanningInProgress:
             render_image_urls(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             update_progress(root, f"Rendering images..", 0.9)
             render_external_urls(root, results_db)
 
-        # check isScanningInProgress
         if isScanningInProgress:
             render_internal_urls(root, results_db)
 
@@ -105,6 +97,3 @@ def perform_full_scan(root, results_db, url):
         else:
             # scan was aborted
             print("Scan aborted.")
-
-
-

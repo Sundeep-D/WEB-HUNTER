@@ -1,17 +1,25 @@
+"""
+File: initializer.py
+Modified by: Sundeep Dayalan
+Reference: https://github.com/thewhiteh4t/FinalRecon
+Website: www.sundeepdayalan.in
+Github: https://github.com/Sundeep-D/WEB-HUNTER
+Date: April 25, 2023
+
+Description: This code initializes a web scanner by extracting the domain and hostname from a given target URL,
+and attempts to obtain the IP address of the hostname. If it fails to get the IP address, it displays an error
+message."""
 import ipaddress
 import sys
 from tkinter import messagebox
-
 import tldextract
 import socket
-import asyncio
 
 
 
 def initialize_scanner(root,target, results_db):
     try:
         if target.startswith(('http', 'https')) is False:
-            print(f'{R}[-] {C}Protocol Missing, Include {W}http:// {C}or{W} https:// \n')
             sys.exit(1)
         else:
             pass
@@ -21,7 +29,6 @@ def initialize_scanner(root,target, results_db):
         else:
             pass
 
-        print(target)
         ext = tldextract.extract(target)
         domain = ext.registered_domain
         hostname = '.'.join(part for part in ext if part)

@@ -1,12 +1,20 @@
-import json
-import os
+"""
+File: export.py
+Author: Sundeep Dayalan
+Website: www.sundeepdayalan.in
+Github: https://github.com/Sundeep-D/WEB-HUNTER
+Date: May 2, 2023
+
+Description: This code generates a PDF report of various information about a given website, including WHOIS and DNS
+information. It uses the fpdf library to create the PDF document and Tkinter to prompt the user to select a directory
+to save the report."""
 import time
 from datetime import datetime
 from tkinter import Tk, filedialog
 
 from fpdf import FPDF
 
-max_chars_per_line = 90  # Maximum characters per line
+max_chars_per_line = 80  # Maximum characters per line
 
 
 def add_scan_header(pdf, json_results):
@@ -152,14 +160,11 @@ def write_ports_information(pdf, json_results):
             lines = [value[i:i + max_chars_per_line] for i in range(0, len(value), max_chars_per_line)]
 
             for line in lines:
-                print(line)
                 pdf.cell(ln=0, h=10.0, align='L', w=0, txt=line, border=0)
                 pdf.set_xy(80, pdf.get_y())
                 pdf.ln(h=6)
 
             pdf.ln(h=8)
-
-    print("Port scanning results written in PDF")
 
 
 def write_external_url_information(pdf, json_results):
@@ -187,14 +192,11 @@ def write_external_url_information(pdf, json_results):
             lines = [value[i:i + max_chars_per_line] for i in range(0, len(value), max_chars_per_line)]
 
             for line in lines:
-                print(line)
                 pdf.cell(ln=0, h=10.0, align='L', w=0, txt=line, border=0)
                 pdf.set_xy(80, pdf.get_y())
                 pdf.ln(h=6)
 
             pdf.ln(h=8)
-
-    print("External urls results written in PDF")
 
 
 def write_internal_url_information(pdf, json_results):
@@ -222,14 +224,11 @@ def write_internal_url_information(pdf, json_results):
             lines = [value[i:i + max_chars_per_line] for i in range(0, len(value), max_chars_per_line)]
 
             for line in lines:
-                print(line)
                 pdf.cell(ln=0, h=10.0, align='L', w=0, txt=line, border=0)
                 pdf.set_xy(80, pdf.get_y())
                 pdf.ln(h=6)
 
             pdf.ln(h=8)
-
-    print("Internal urls results written in PDF")
 
 
 def write_images_url_information(pdf, json_results):
@@ -257,14 +256,11 @@ def write_images_url_information(pdf, json_results):
             lines = [value[i:i + max_chars_per_line] for i in range(0, len(value), max_chars_per_line)]
 
             for line in lines:
-                print(line)
                 pdf.cell(ln=0, h=10.0, align='L', w=0, txt=line, border=0)
                 pdf.set_xy(80, pdf.get_y())
                 pdf.ln(h=6)
 
             pdf.ln(h=8)
-
-    print("Images urls results written in PDF")
 
 
 def write_ssl_information(pdf, json_results):
@@ -324,8 +320,3 @@ def export(json_results):
     )
     root.destroy()
 
-    if not os.path.exists('Results'):
-        os.makedirs('Results')
-    pdf.output(file_path, 'F')
-    with open('Results/output.txt', 'w') as file:
-        json.dump(json_results, file)
