@@ -366,8 +366,13 @@ def validate_url(url):
 
 
 def initialize_new_scan():
+    global isScanning
     root.url_input.grid()
     root.main_button_1.grid()
+    root.main_button_1.configure(text="Scan")
+    isScanning = False
+    scanner.isScanningInProgress = False
+    root.main_button_1.update()
     root.progressbar_1.grid_remove()
     root.progress_status.grid_remove()
     root.tabview.grid_remove()

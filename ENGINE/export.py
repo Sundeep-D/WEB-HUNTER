@@ -319,4 +319,5 @@ def export(json_results):
         filetypes=[("PDF Files", "*.pdf")]
     )
     root.destroy()
+    pdf.output(file_path, 'F')
 
