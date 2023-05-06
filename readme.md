@@ -1,7 +1,5 @@
+![Webhunter](https://github.com/Sundeep-D/WEB-HUNTER/raw/v1.1/bg.png)
 
-# Project Title
-
-A brief description of what this project does and who it's for
 
 # WEB HUNTER
 
