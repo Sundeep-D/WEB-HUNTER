@@ -1,3 +1,8 @@
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
 # WEB HUNTER
 
 Web Hunter is an automated web reconnaissance tool that utilizes the power of Python programming language to perform a thorough analysis of a target website. This standalone software tool offers comprehensive data on the target website, including header details, Whois information, SSL certificate information, crawler data, DNS enumeration, subdomain enumeration, directory searching, port scanning, and export information in .pdf format.
@@ -35,8 +40,10 @@ Build with pyinstaller
 
 ## Download exe file
 
-This is a stable executable file. Download here
-https://github.com/Sundeep-D/WEB-HUNTER/releases/download/v2.0/WEB.HUNTER.exe
+This is a stable executable file. Download
+[here](https://github.com/Sundeep-D/WEB-HUNTER/releases/download/v2.0/WEB.HUNTER.exe)
+
+*Note: Windows defender will restrict to run this file but bypass and run the file "Run Anyway"*
 
 ## Usage/Examples
 
