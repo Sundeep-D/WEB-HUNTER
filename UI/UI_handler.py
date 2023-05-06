@@ -1,3 +1,12 @@
+"""
+File: UI_handler.py
+Author: Sundeep Dayalan
+Website: www.sundeepdayalan.in
+Github: https://github.com/Sundeep-D/WEB-HUNTER
+Date: April 24, 2023
+
+Description: It includes setting the window geometry, appearance mode, and color theme. It also creates and renders
+navigation drawer items, and configures the home frame."""
 import os
 import re
 import time
@@ -10,7 +19,6 @@ from ENGINE.scanner import perform_full_scan
 from tkinter import messagebox
 
 from UI.ScrollableAboutFrame import ScrollableAboutFrame
-from UI.ScrollableLabelButtonFrame import ScrollableLabelButtonFrame
 
 root = None
 image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
@@ -27,7 +35,7 @@ def initialize_ui():
     root.wm_state('zoomed')
     root.update()
     root.attributes('-fullscreen', False)
-    root.wm_iconbitmap('UI/images/logo.ico')
+    # root.wm_iconbitmap('UI/images/logo.ico')
 
     customtkinter.set_appearance_mode(
         "System"
@@ -103,10 +111,6 @@ def render_navigation_drawer_items():
     )
     root.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
 
-    # root.appearance_mode_label = customtkinter.CTkLabel(
-    #     root.sidebar_frame, text="Appearance Mode:", anchor="w"
-    # )
-    # root.appearance_mode_label.grid(row=5, column=0, padx=20, pady=(10, 0))
     root.export_button = customtkinter.CTkButton(
         root.sidebar_frame,
         text="Export results",
@@ -138,37 +142,24 @@ def configure_home_frame():
     root.home_frame = customtkinter.CTkFrame(
         root, corner_radius=0, fg_color="transparent"
     )
-    # root.home_frame.grid_columnconfigure(0, weight=1)
     root.home_frame.grid_columnconfigure(1, weight=1)
     root.home_frame.grid_columnconfigure((2), weight=16)
     root.home_frame.grid_rowconfigure((0), weight=0)
     root.home_frame.grid_rowconfigure((1, 2), weight=2)
 
-    print(dir(root.home_frame))
     #     bg
-    root.home_frame.bg_image = customtkinter.CTkImage(Image.open("UI/images/bg.png"),
+    root.home_frame.bg_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "bg.png")),
                                                       size=(1200, 800))
     root.home_frame.bg_image_label = customtkinter.CTkLabel(root.home_frame, image=root.home_frame.bg_image, text='')
     root.home_frame.bg_image_label.grid(row=0, column=2, rowspan=6, columnspan=2, padx=(5, 5), pady=(10, 5),
                                         sticky="nsew")
     root.home_frame.bg_image_label.grid()
-    # self.bg_image_label.grid_remove()
 
 
 def configure_about_frame():
     root.about_frame = customtkinter.CTkFrame(
         root, corner_radius=0, fg_color="transparent"
     )
-    # root.about_frame.progressbar_1 = customtkinter.CTkProgressBar(root.about_frame)
-    # root.about_frame.progressbar_1.grid(
-    #     row=2,
-    #     column=1,
-    #     rowspan=1,
-    #     columnspan=2,
-    #     padx=(20, 10),
-    #     pady=(10, 10),
-    #     sticky="ew",
-    # )
     render_about_frame()
 
 
@@ -339,7 +330,6 @@ def perform_scan():
         results_db = {}
         # start the scan
         url = root.url_input.get()
-        print(url)
         # url = "https://googler.innn/"
         if validate_url(url):
             print("Valid URL")
@@ -349,7 +339,6 @@ def perform_scan():
             if 'ip' in results_db:
                 start_scan()
                 time.sleep(1)
-                print("INITIAL DATA: ", results_db)
 
                 perform_full_scan(root, results_db, url)
             else:
