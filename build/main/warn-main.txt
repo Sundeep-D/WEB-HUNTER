@@ -81,7 +81,7 @@ missing module named importlib_metadata - imported by setuptools._importlib (del
 missing module named _scproxy - imported by urllib.request (conditional)
 missing module named StringIO - imported by urllib3.packages.six (conditional), six (conditional), dnslib.lex (optional)
 missing module named simplejson - imported by requests.compat (conditional, optional)
-missing module named chardet - imported by requests.compat (optional), requests (optional), requests.packages (optional), bs4.dammit (optional)
+missing module named chardet - imported by bs4.dammit (optional), requests.compat (optional), requests (optional), requests.packages (optional)
 missing module named 'OpenSSL.crypto' - imported by urllib3.contrib.pyopenssl (delayed)
 missing module named 'cryptography.x509' - imported by urllib3.contrib.pyopenssl (delayed, optional)
 missing module named 'cryptography.hazmat' - imported by urllib3.contrib.pyopenssl (top-level), dns.dnssec (optional)

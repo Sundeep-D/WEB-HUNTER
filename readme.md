@@ -32,6 +32,12 @@ Build with pyinstaller
 ```bash
   pyinstaller main.spec
 ```
+
+## Download exe file
+
+This is a stable executable file. Download here
+https://github.com/Sundeep-D/WEB-HUNTER/releases/download/v2.0/WEB.HUNTER.exe
+
 ## Usage/Examples
 
 1. Double-click on the executable file generator in dist folder to launch the application.
